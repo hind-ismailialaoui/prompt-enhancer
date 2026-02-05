@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Prompt Optimizer (ChatGPT)",
+  "version": "0.1.0",
+  "description": "Suggest improved prompts (RTF/CRAFT/CLEAR) directly in chatgpt.com.",
+  "permissions": ["storage", "activeTab", "clipboardWrite"],
+  "host_permissions": ["https://chatgpt.com/*"],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    {
+      "matches": ["https://chatgpt.com/*"],
+      "js": ["content.js"],
+      "css": ["ui.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/*.png"
+      ],
+      "matches": ["https://chatgpt.com/*"]
+    }
+  ]
+}
