@@ -40,10 +40,24 @@
   let toggleStart = { x: 0, y: 0 };
 
   function setSidebarOpen(isOpen) {
-    if (sidebarEl) sidebarEl.classList.toggle("po-open", isOpen);
+    if (sidebarEl) {
+      sidebarEl.classList.toggle("po-open", isOpen);
+      if (isOpen) {
+        sidebarEl.classList.remove("po-animate-in");
+        void sidebarEl.offsetWidth;
+        sidebarEl.classList.add("po-animate-in");
+        const active = sidebarEl.querySelector(`.po-view-${currentView}`);
+        if (active) {
+          active.classList.remove("po-view-animate");
+          void active.offsetWidth;
+          active.classList.add("po-view-animate");
+        }
+      } else {
+        sidebarEl.classList.remove("po-animate-in");
+      }
+    }
     if (backdropEl) backdropEl.classList.toggle("po-open", isOpen);
     if (toggleEl) toggleEl.setAttribute("aria-expanded", isOpen ? "true" : "false");
-    if (sidebarEl) sidebarEl.classList.toggle("po-animate-in", isOpen);
   }
 
   function ensureSidebar() {
